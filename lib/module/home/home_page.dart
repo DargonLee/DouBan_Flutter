@@ -13,7 +13,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomeState extends State<HomePage> {
-
   void _onSearchBarTapped() {
     Navigator.push(context, MaterialPageRoute(
       builder: (BuildContext context) {
@@ -21,16 +20,6 @@ class _HomeState extends State<HomePage> {
       }
     ));
     //Navigator.pushNamed(context, '/search');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-    return RootPage(
-      body: Stack(
-        children: <Widget>[Container(), _topWidget(), _bottomWidget()],
-      ),
-    );
   }
 
   Widget _topWidget() {
@@ -59,6 +48,7 @@ class _HomeState extends State<HomePage> {
         width: AppUtil.screenWidth,
         height: AppUtil.screenHeight - 102,
         child: ListView(
+          padding: EdgeInsets.zero,
           children: <Widget>[
             RecommentItem(
               context: context,
@@ -93,6 +83,16 @@ class _HomeState extends State<HomePage> {
           image: AssetImage('lib/images/scan.png'),
         )
       ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return RootPage(
+      body: Stack(
+        children: <Widget>[Container(), _topWidget(), _bottomWidget()],
+      ),
     );
   }
 }
