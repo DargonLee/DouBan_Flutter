@@ -37,7 +37,7 @@ class RankContainer extends StatelessWidget {
             ), 
           ),
           Container(
-            width: this.width,
+            width: this.width > 90 ? 90 : width,
             height: 14,
             child: Row(
               children: <Widget>[
