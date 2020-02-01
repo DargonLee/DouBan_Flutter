@@ -1,13 +1,6 @@
 import 'package:flutter/material.dart';
 
 class RankContainer extends StatelessWidget {
-  final String title;
-  final int rank;
-  final double score;
-  final double width;
-  final double starWidth;
-  final double height;
-
   RankContainer({
     Key key,
     this.title = '默认',
@@ -17,6 +10,13 @@ class RankContainer extends StatelessWidget {
     this.starWidth = 10.0,
     this.height
   });
+
+  final double height;
+  final int rank;
+  final double score;
+  final double starWidth;
+  final String title;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
