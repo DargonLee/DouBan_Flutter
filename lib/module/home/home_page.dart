@@ -1,5 +1,7 @@
 import 'package:douban/module/category/categroy_page.dart';
+import 'package:douban/module/home/recomment_item.dart';
 import 'package:douban/module/model/douban_model.dart';
+import 'package:douban/module/public/app_util.dart';
 import 'package:douban/module/search/search_page.dart';
 import 'package:douban/module/widgets/root_page.dart';
 import 'package:douban/module/widgets/search_bar.dart';
@@ -52,10 +54,26 @@ class _HomeState extends State<HomePage> {
 
   Widget _bottomWidget() {
     return Positioned(
-      top: 150,
+      top: 102,
       child: Container(
-        width: 300,
-        height: 500,
+        width: AppUtil.screenWidth,
+        height: AppUtil.screenHeight - 102,
+        child: ListView(
+          children: <Widget>[
+            RecommentItem(
+              context: context,
+              category: DoubanCategory.Movie,
+            ),
+            RecommentItem(
+              context: context,
+              category: DoubanCategory.Book,
+            ),
+            RecommentItem(
+              context: context,
+              category: DoubanCategory.Music,
+            ),
+          ],
+        ),
       ),
     );
   }

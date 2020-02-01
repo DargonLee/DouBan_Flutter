@@ -1,5 +1,6 @@
 import 'package:douban/module/home/home_page.dart';
 import 'package:douban/module/personal/personal_page.dart';
+import 'package:douban/module/public/app_util.dart';
 import 'package:flutter/material.dart';
 
 class NavigationBar extends StatefulWidget {
@@ -26,9 +27,15 @@ class _NavigationBarState extends State<NavigationBar> {
     });
   }
 
+  void _initApp(BuildContext context) {
+    AppUtil.screenWidth = MediaQuery.of(context).size.width;
+    AppUtil.screenHeight = MediaQuery.of(context).size.height;
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    _initApp(context);
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem> [
