@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 class RankContainer extends StatelessWidget {
   RankContainer({
     Key key,
