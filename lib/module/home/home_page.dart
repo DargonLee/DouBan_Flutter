@@ -48,7 +48,7 @@ class _HomeState extends State<HomePage> {
         width: AppUtil.screenWidth,
         height: AppUtil.screenHeight - 102,
         child: ListView(
-          padding: EdgeInsets.zero,
+          padding: EdgeInsets.zero ,
           children: <Widget>[
             RecommentItem(
               context: context,
