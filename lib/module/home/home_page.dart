@@ -3,6 +3,7 @@ import 'package:douban/module/home/recomment_item.dart';
 import 'package:douban/module/model/douban_model.dart';
 import 'package:douban/module/public/app_util.dart';
 import 'package:douban/module/search/search_page.dart';
+import 'package:douban/module/widgets/jump_route.dart';
 import 'package:douban/module/widgets/root_page.dart';
 import 'package:douban/module/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -14,9 +15,9 @@ class HomePage extends StatefulWidget {
 
 class _HomeState extends State<HomePage> {
   void _onSearchBarTapped() {
-    Navigator.push(context, MaterialPageRoute(
+    Navigator.push(context, JumpRoute(
       builder: (BuildContext context) {
-        return CategoryPage(category: DoubanCategory.Movie);
+        return SearchPage();
       }
     ));
     //Navigator.pushNamed(context, '/search');
