@@ -1,4 +1,5 @@
 import 'package:douban/common/network/network_helper.dart';
+import 'package:douban/module/model/movie_model.dart';
 
 class CategoryDataSource {
   final void Function() onDataCallback;
@@ -8,6 +9,7 @@ class CategoryDataSource {
   });
 
   int page = 1;
+  List movieList = List();
 
   // 电影的网络数据
   void requestRecentMovie() {
@@ -16,8 +18,11 @@ class CategoryDataSource {
   }
   void _onMovieCallback(int statusCode, dynamic resultMap) {
     if (statusCode == 200 && resultMap is Map) {
-      
+      for (dynamic result in resultMap['result']) {
+        movieList.add(MovieModel.castFromMap(result));
+      }
     }
+    onDataCallback();
   }
   // 图书的网络数据
   // 音乐的网络数据

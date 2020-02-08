@@ -1,4 +1,5 @@
 import 'package:douban/module/category/category__detail_item.dart';
+import 'package:douban/module/category/category_data_source.dart';
 import 'package:douban/module/model/douban_model.dart';
 import 'package:douban/module/widgets/root_page.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,13 +20,34 @@ class CategoryPage extends StatefulWidget {
 class _CategoryState extends State<CategoryPage> with SingleTickerProviderStateMixin {
   TabController _tabController;
   RefreshController _refreshController = RefreshController(initialRefresh: false);
+  CategoryDataSource _categoryDataSource;
   int _itemCount = 10;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    _initDataSource();
     _tabController = TabController(vsync: this, length: DoubanModel.getMoreTitles(widget.category).length);
+  }
+
+  void _initDataSource () {
+    _categoryDataSource = CategoryDataSource(
+      onDataCallback: _onDataCallback
+    );
+    _requestData();
+  }
+
+  void _requestData() {
+    if () {
+      
+    }
+  }
+
+  void _onDataCallback() {
+    setState(() {
+      
+    });
   }
 
   void _onLoading () {
