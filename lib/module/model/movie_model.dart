@@ -1,0 +1,3 @@
+class MovieModel {
+  String id = '';
+}
