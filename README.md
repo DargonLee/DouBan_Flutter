@@ -14,3 +14,5 @@
 ***
 
 ### 热门Flutter组件基本用法
+
+![image](https://github.com/DargonLee/DouBan_Flutter/master/screenshots/vim-screenshot.jpg)

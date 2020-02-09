@@ -9,55 +9,60 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class CategoryPage extends StatefulWidget {
   final DoubanCategory category;
 
-  CategoryPage({
-    Key key,
-    this.category
-  });
+  CategoryPage({Key key, this.category});
   @override
   _CategoryState createState() => _CategoryState();
 }
 
-class _CategoryState extends State<CategoryPage> with SingleTickerProviderStateMixin {
+class _CategoryState extends State<CategoryPage>
+    with SingleTickerProviderStateMixin {
   TabController _tabController;
-  RefreshController _refreshController = RefreshController(initialRefresh: false);
+  RefreshController _refreshController =
+      RefreshController(initialRefresh: false);
   CategoryDataSource _categoryDataSource;
-  int _itemCount = 10;
+  int _currentTab = 0;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
     _initDataSource();
-    _tabController = TabController(vsync: this, length: DoubanModel.getMoreTitles(widget.category).length);
+    _tabController = TabController(
+        vsync: this, length: DoubanModel.getMoreTitles(widget.category).length);
   }
 
-  void _initDataSource () {
-    _categoryDataSource = CategoryDataSource(
-      onDataCallback: _onDataCallback
-    );
+  void _initDataSource() {
+    _categoryDataSource = CategoryDataSource(onDataCallback: _onDataCallback);
     _requestData();
   }
 
   void _requestData() {
-    if () {
-      
+    if (widget.category == DoubanCategory.Movie) {
+      if (_currentTab == 0) {
+        _categoryDataSource.requestRecentMovie();
+      } else if (_currentTab == 1) {
+        _categoryDataSource.requestCollectionMovie();
+      } else if (_currentTab == 2) {
+        _categoryDataSource.requestHotMovie();
+      }
     }
   }
 
   void _onDataCallback() {
-    setState(() {
-      
-    });
+    _categoryDataSource.isPageLoading = false;
+    setState(() {});
   }
 
-  void _onLoading () {
-    Future.delayed(Duration(seconds: 2), () {
-      _itemCount += 5;
-      _refreshController.refreshCompleted();
-      setState(() {
-        
-      });
-    });
+  void _onTabbarTapped(int index) {
+    _currentTab = index;
+    _categoryDataSource.reset();
+    _requestData();
+    setState(() {});
+  }
+
+  void _onLoading() {
+    _categoryDataSource.page++;
+    _requestData();
   }
 
   @override
@@ -75,12 +80,14 @@ class _CategoryState extends State<CategoryPage> with SingleTickerProviderStateM
 
   Widget _tabbar() {
     return TabBar(
+      onTap: _onTabbarTapped,
       controller: _tabController,
       unselectedLabelColor: Colors.white,
       indicatorColor: Colors.white,
       indicatorSize: TabBarIndicatorSize.label,
       labelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-      unselectedLabelStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
+      unselectedLabelStyle:
+          TextStyle(fontSize: 18, fontWeight: FontWeight.normal),
       labelPadding: EdgeInsets.only(bottom: 8),
       tabs: _tabs(),
     );
@@ -88,45 +95,52 @@ class _CategoryState extends State<CategoryPage> with SingleTickerProviderStateM
 
   List<Widget> _tabs() {
     List<Widget> tabs = List();
-    for(int i = 0; i < DoubanModel.getMoreTitles(widget.category).length; i++) {
+    for (int i = 0;
+        i < DoubanModel.getMoreTitles(widget.category).length;
+        i++) {
       tabs.add(Text(DoubanModel.getMoreTitles(widget.category)[i]));
     }
     return tabs;
   }
 
-  List<Widget>  _tabViews() {
+  List<Widget> _tabViews() {
     List<Widget> tabs = List();
-    for(int i = 0; i < DoubanModel.getMoreTitles(widget.category).length; i++) {
+    for (int i = 0;
+        i < DoubanModel.getMoreTitles(widget.category).length;
+        i++) {
       tabs.add(_categoryList());
     }
     return tabs;
   }
 
   Widget _categoryList() {
-    return SmartRefresher(
-      enablePullDown: true,
-      enablePullUp: true,
-      controller: _refreshController,
-      onLoading: _onLoading,
-      child: ListView.separated(
-        itemBuilder: _buildItem,
-        separatorBuilder: (BuildContext context, int index) {
-          return Container(height: 21,);
-        }, 
-        itemCount: _itemCount
-      ),
-      footer: CustomFooter(
-        builder: (BuildContext context, LoadStatus mode) {
+    if (_categoryDataSource.isPageLoading) {
+      return CupertinoActivityIndicator();
+    } else {
+      return SmartRefresher(
+        enablePullDown: false,
+        enablePullUp: true,
+        controller: _refreshController,
+        onLoading: _onLoading,
+        child: ListView.separated(
+            itemBuilder: _buildItem,
+            separatorBuilder: (BuildContext context, int index) {
+              return Container(
+                height: 21,
+              );
+            },
+            itemCount: _categoryDataSource.movieList.length),
+        footer: CustomFooter(builder: (BuildContext context, LoadStatus mode) {
           Widget body;
           if (mode == LoadStatus.idle) {
             return Container();
-          }else if (mode == LoadStatus.loading) {
+          } else if (mode == LoadStatus.loading) {
             return CupertinoActivityIndicator();
-          }else if (mode == LoadStatus.failed) {
+          } else if (mode == LoadStatus.failed) {
             body = Text('Loading failed');
-          }else if (mode == LoadStatus.canLoading) {
-            body = Text('Release to load'); 
-          }else {
+          } else if (mode == LoadStatus.canLoading) {
+            body = Text('Release to load');
+          } else {
             body = Text('No more data');
           }
           return Container(
@@ -135,12 +149,17 @@ class _CategoryState extends State<CategoryPage> with SingleTickerProviderStateM
               child: body,
             ),
           );
-        }
-      ),
-    );
+        }),
+      );
+    }
   }
 
-  Widget _buildItem (BuildContext context, int index) {
-    return CategoryDetailItem();
+  Widget _buildItem(BuildContext context, int index) {
+    if (_categoryDataSource.isPageLoading) {
+      return Container();
+    }
+    return CategoryDetailItem(
+      movie: _categoryDataSource.movieList[index],
+    );
   }
 }

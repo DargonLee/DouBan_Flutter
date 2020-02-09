@@ -12,6 +12,7 @@ class MovieModel {
   List directors = List();
   String year = '';
   String image = '';
+  int collectionCount = 0;
 
   MovieModel.castFromMap(dynamic map) {
     if (map['id'] != null) {
@@ -55,16 +56,19 @@ class MovieModel {
       }
     }
     if (map['directors'] != null) {
-      id = map['directors'];
+      directors = map['directors'];
     }
     if (map['year'] != null) {
       year = map['year'];
     }
     if (map['images'] != null && map['images'] is Map) {
-      Map imageList = map['image'];
+      Map imageList = map['images'];
       if(imageList['large'] != null) {
         image = imageList['large'];
       }
+    }
+    if (map['collect_count'] != null) {
+      collectionCount = map['collect_count'];
     }
   }
 }
