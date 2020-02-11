@@ -45,7 +45,21 @@ class _CategoryState extends State<CategoryPage>
       } else if (_currentTab == 2) {
         _categoryDataSource.requestHotMovie();
       }
-    }
+    }else if(widget.category == DoubanCategory.Book) {
+      if (_currentTab == 0) {
+        _categoryDataSource.requestRecentBook();
+      } else if (_currentTab == 1 ) {
+        _categoryDataSource.requestRecommandBook();
+      } else {
+        _categoryDataSource.requestHotBook();
+      }
+    }else {    
+      if (_currentTab == 0) {
+        _categoryDataSource.requestRecentMusic();
+      } else if (_currentTab == 1 ) {
+        _categoryDataSource.requestHotMusic();
+      }      
+    } 
   }
 
   void _onDataCallback() {
@@ -129,7 +143,7 @@ class _CategoryState extends State<CategoryPage>
                 height: 21,
               );
             },
-            itemCount: _categoryDataSource.movieList.length),
+            itemCount: _getItemCount()),
         footer: CustomFooter(builder: (BuildContext context, LoadStatus mode) {
           Widget body;
           if (mode == LoadStatus.idle) {
@@ -154,12 +168,26 @@ class _CategoryState extends State<CategoryPage>
     }
   }
 
+  int _getItemCount() {
+    if (widget.category == DoubanCategory.Movie) {
+      return _categoryDataSource.movieList.length;
+    } else if (widget.category == DoubanCategory.Book) {
+      return _categoryDataSource.bookList.length;
+    } else {
+      return _categoryDataSource.musicList.length;
+    }     
+  }
+
   Widget _buildItem(BuildContext context, int index) {
     if (_categoryDataSource.isPageLoading) {
       return Container();
     }
     return CategoryDetailItem(
-      movie: _categoryDataSource.movieList[index],
+      context: context,
+      category: widget.category,
+      movie: widget.category == DoubanCategory.Movie ? _categoryDataSource.movieList[index] : null,
+      book: widget.category == DoubanCategory.Book ? _categoryDataSource.bookList[index] : null,
+      music: widget.category == DoubanCategory.Music ? _categoryDataSource.musicList[index] : null,
     );
   }
 }
