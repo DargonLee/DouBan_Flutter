@@ -17,7 +17,7 @@
 
 
 ### 项目截图
-![image](https://github.com/DargonLee/DouBan_Flutter/blob/master/screenshots/01.png)
-![image](https://github.com/DargonLee/DouBan_Flutter/blob/master/screenshots/02.png)
-![image](https://github.com/DargonLee/DouBan_Flutter/blob/master/screenshots/03.png)
-![image](https://github.com/DargonLee/DouBan_Flutter/blob/master/screenshots/04.png)
+<img src="https://github.com/DargonLee/DouBan_Flutter/blob/master/screenshots/01.png" width="375" height="667">
+<img src="https://github.com/DargonLee/DouBan_Flutter/blob/master/screenshots/02.png" width="375" height="667">
+<img src="https://github.com/DargonLee/DouBan_Flutter/blob/master/screenshots/03.png" width="375" height="667">
+<img src="https://github.com/DargonLee/DouBan_Flutter/blob/master/screenshots/04.png" width="375" height="667">
