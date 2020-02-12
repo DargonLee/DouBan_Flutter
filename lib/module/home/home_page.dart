@@ -8,12 +8,33 @@ import 'package:douban/module/widgets/root_page.dart';
 import 'package:douban/module/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
 
+import 'home_data_source.dart';
+
 class HomePage extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
 
 class _HomeState extends State<HomePage> {
+  HomeDataSource _homeDataSource;
+
+  @override
+  void initState() {
+    super.initState();
+    initDataSource();
+  }  
+
+  void initDataSource() {
+    _homeDataSource = HomeDataSource(onDataCallback: _onDataCallback);    
+    _homeDataSource.requestHomeRecommandMovie();
+    _homeDataSource.requestHomeRecommandBook();
+    _homeDataSource.requestHomeRecommandMusic();
+  }
+
+  void _onDataCallback() {        
+    setState(() {});
+  } 
+
   void _onSearchBarTapped() {
     Navigator.push(context, JumpRoute(
       builder: (BuildContext context) {
@@ -54,14 +75,17 @@ class _HomeState extends State<HomePage> {
             RecommentItem(
               context: context,
               category: DoubanCategory.Movie,
+              movies: _homeDataSource.movieList,
             ),
             RecommentItem(
               context: context,
               category: DoubanCategory.Book,
+              books: _homeDataSource.bookList,
             ),
             RecommentItem(
               context: context,
               category: DoubanCategory.Music,
+              musics: _homeDataSource.musicList,
             ),
           ],
         ),

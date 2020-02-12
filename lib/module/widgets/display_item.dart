@@ -47,28 +47,31 @@ class DisplayItem extends StatelessWidget {
             width: (AppUtil.screenWidth - 4 * 80 - 20)/3,
           );
         },
-        itemCount: 4
+        itemCount: items.length
       ),
     );
   }
 
   Widget _buildItem(BuildContext context, int index) {
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        _onItemTapped(index);
+      },
       child: Column(
         children: <Widget>[
           FadeInImage.assetNetwork(
             width: 80,
             height: 112,
-            placeholder: 'lib/images/scan.png', //_getImageUrl(index)
-            image: 'http://a0.att.hudong.com/78/52/01200000123847134434529793168.jpg'
+            placeholder: 'lib/images/scan.png', 
+            image: _getImageUrl(index)//'http://a0.att.hudong.com/78/52/01200000123847134434529793168.jpg'
           ),
           Container(height: 10,),
           RankContainer(
             width: 80,
             height: 34,
-            rank: 4,//_getItemScore(index)
-            score: 7.6,//_getItemRank(index)
+            title: _getItemTitle(index),
+            rank: _getItemRank(index),//4,
+            score: _getItemScore(index),//7.6,//
           )
         ],
       ),

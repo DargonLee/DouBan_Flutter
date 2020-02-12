@@ -1,16 +1,25 @@
 import 'package:douban/module/category/categroy_page.dart';
+import 'package:douban/module/model/book_model.dart';
 import 'package:douban/module/model/douban_model.dart';
+import 'package:douban/module/model/movie_model.dart';
+import 'package:douban/module/model/music_model.dart';
 import 'package:douban/module/widgets/display_item.dart';
 import 'package:flutter/material.dart';
 
 class RecommentItem extends StatelessWidget {
   final BuildContext context;
   final DoubanCategory category;
+  final List<MovieModel> movies;
+  final List<BookModel> books;
+  final List<MusicModel> musics;
 
   RecommentItem({
     Key key,
     this.context,
-    this.category = DoubanCategory.Movie
+    this.category,
+    this.movies = const [],
+    this.books = const [],
+    this.musics = const [],
   });
 
   void _onMoreTapped() {
@@ -31,7 +40,11 @@ class RecommentItem extends StatelessWidget {
         children: <Widget>[
           _titleItem(),
           Container(height: 10,),
-          DisplayItem()
+          DisplayItem(
+            context: context,
+            category: category,     
+            items: category == DoubanCategory.Movie ? this.movies : category == DoubanCategory.Book ? this.books : this.musics,
+          )
         ],
       ),
     );

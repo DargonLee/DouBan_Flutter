@@ -32,7 +32,8 @@ class MovieDetailPage extends StatelessWidget {
   }
 
   Widget _configTopContainer() {
-    return Container(      
+    return Container(   
+      color: Color(0xFFEC84A2),   
       height: 165,
       padding: EdgeInsets.fromLTRB(21, 15, 27, 30),
       child: Row(
@@ -97,6 +98,7 @@ class MovieDetailPage extends StatelessWidget {
 
   Widget _configBriefWidget() {
     return Container(
+      color: Color(0xFFEC84A2),
       height: 173,
       padding: EdgeInsets.only(left: 23, right: 21, bottom: 30),
       child: Column(
@@ -128,6 +130,7 @@ class MovieDetailPage extends StatelessWidget {
 
   Widget _configDirectorWidget() {
     return Container(
+      color: Color(0xFFEC84A2),
       height: 177,
       padding: EdgeInsets.only(left: 23, bottom: 30),
       child: Column(
@@ -153,7 +156,7 @@ class MovieDetailPage extends StatelessWidget {
                   height: 102,    
                   fit: BoxFit.cover,            
                   image: NetworkImage(
-                    movie.directors[index].avatar
+                    movie.directors[index]['avatars']['large']
                   ),
                 );
               },
@@ -169,6 +172,7 @@ class MovieDetailPage extends StatelessWidget {
 
   Widget _configActionsWidget() {
     return Container(
+      color: Color(0xFFEC84A2),
       height: 177,
       padding: EdgeInsets.only(left: 23, bottom: 30),
       child: Column(
@@ -210,6 +214,7 @@ class MovieDetailPage extends StatelessWidget {
 
   Widget _configCommentContainer() {
     return Container(
+      color: Color(0xFFEC84A2),
       height: 122.0 * 4 + 20 + 25,
       padding: EdgeInsets.only(left: 23, bottom: 30, right: 17),
       child: Column(
@@ -231,7 +236,7 @@ class MovieDetailPage extends StatelessWidget {
               itemCount: 4,
               itemBuilder: _buildCommentItem,
               separatorBuilder: (BuildContext context, int index) {
-                return Container(height: 37,);
+                return Container(height: 27,);
               },
             ),
           )          
@@ -247,24 +252,17 @@ class MovieDetailPage extends StatelessWidget {
           children: <Widget>[
             CircleAvatar(
               radius: 14.0,
-              backgroundImage: NetworkImage('https://img9.doubanio.com/view/subject/m/public/s29491796.jpg'),
+              backgroundImage: NetworkImage('https://img1.doubanio.com/view/photo/l/public/p2582159659.webp'),
             ),
-            Container(width: 7,),
-            RankContainer(
-              width: 68,
-              height: 28,
-              starWidth: 8,
-              title: '观众${index}',
-              rank: 4,
-              score: 7.6,
-            )
+            Container(width: 10,),
+            Text('观众${index}')
           ],
         ),
         Container(height: 15,),
         Text(
           '本片片名引自《红楼梦》，精神上也致敬这部伟大的中国小说，写垢与净，真与假，生与死，探索“无常”。茶烟渐起，清谈渐欢，雅俗之间，悦人欢颜。呼朋唤友，且观片去。',
           softWrap: true,
-          maxLines: 3,
+          maxLines: 4,
           overflow: TextOverflow.ellipsis,
           style: TextStyle(
             fontSize: 10,
