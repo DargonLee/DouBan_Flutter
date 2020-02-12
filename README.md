@@ -15,7 +15,7 @@
 
 ### 热门Flutter组件基本用法
 
-![image](https://github.com/DargonLee/DouBan_Flutter/master/screenshots/01.jpg)
-![image](https://github.com/DargonLee/DouBan_Flutter/master/screenshots/02.jpg)
-![image](https://github.com/DargonLee/DouBan_Flutter/master/screenshots/03.jpg)
-![image](https://github.com/DargonLee/DouBan_Flutter/master/screenshots/04.jpg)
+![image](https://github.com/DargonLee/DouBan_Flutter/master/screenshots/01.png)
+![image](https://github.com/DargonLee/DouBan_Flutter/master/screenshots/02.png)
+![image](https://github.com/DargonLee/DouBan_Flutter/master/screenshots/03.png)
+![image](https://github.com/DargonLee/DouBan_Flutter/master/screenshots/04.png)
