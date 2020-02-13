@@ -7,7 +7,7 @@ class RankContainer extends StatelessWidget {
     this.score,
     this.width,
     this.starWidth = 10.0,
-    this.height
+    this.height, int heigth
   });
 
   final double height;

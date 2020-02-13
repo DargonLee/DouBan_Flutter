@@ -1,3 +1,5 @@
+import 'package:douban/module/detail/book_detail_page.dart';
+import 'package:douban/module/detail/music_detail_page.dart';
 import 'package:douban/module/model/book_model.dart';
 import 'package:douban/module/model/movie_model.dart';
 import 'package:douban/module/model/music_model.dart';
@@ -26,12 +28,11 @@ class DisplayItem extends StatelessWidget {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
       if (category == DoubanCategory.Movie) {
         return MovieDetailPage(movie: items[index]);
-      } 
-      // else if (category == DoubanCategory.Book) {
-      //   return BookDetailPage(book: items[index],);
-      // } else {
-      //   return MusicDetailPage(music: items[index],);
-      // }
+      } else if (category == DoubanCategory.Book) {
+        return BookDetailPage(book: items[index],);
+      }else {
+        return MusicDetailPage(music: items[index],);
+      }
     }));
   }
 
