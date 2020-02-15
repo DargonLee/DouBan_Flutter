@@ -1,13 +1,13 @@
 import 'package:douban/module/category/categroy_page.dart';
 import 'package:douban/module/home/recomment_item.dart';
 import 'package:douban/module/model/douban_model.dart';
+import 'package:douban/module/nutrition/nutrition_page.dart';
 import 'package:douban/module/public/app_util.dart';
 import 'package:douban/module/search/search_page.dart';
 import 'package:douban/module/widgets/jump_route.dart';
 import 'package:douban/module/widgets/root_page.dart';
 import 'package:douban/module/widgets/search_bar.dart';
 import 'package:flutter/material.dart';
-
 import 'home_data_source.dart';
 
 class HomePage extends StatefulWidget {
@@ -22,46 +22,52 @@ class _HomeState extends State<HomePage> {
   void initState() {
     super.initState();
     initDataSource();
-  }  
+  }
 
   void initDataSource() {
-    _homeDataSource = HomeDataSource(onDataCallback: _onDataCallback);    
+    _homeDataSource = HomeDataSource(onDataCallback: _onDataCallback);
     _homeDataSource.requestHomeRecommandMovie();
     _homeDataSource.requestHomeRecommandBook();
     _homeDataSource.requestHomeRecommandMusic();
   }
 
-  void _onDataCallback() {        
+  void _onDataCallback() {
     setState(() {});
-  } 
+  }
 
   void _onSearchBarTapped() {
-    Navigator.push(context, JumpRoute(
-      builder: (BuildContext context) {
-        return SearchPage();
+    Navigator.push(context, JumpRoute(builder: (BuildContext context) {
+      return SearchPage();
+    }));
+    //Navigator.pushNamed(context, '/search');
+  }
+
+  void _onMenuTapped() {
+    Navigator.push(context, MaterialPageRoute(
+      builder: (context) {
+        return NutritionPage();
       }
     ));
-    //Navigator.pushNamed(context, '/search');
   }
 
   Widget _topWidget() {
     return Container(
-        height: 170,
-        color: Color(0xFF33c9FF),
-        child: SafeArea(
-          child: Container(
-            height: 52,
-            alignment: Alignment.topCenter,
-            padding: EdgeInsets.only(
-              top: 20,
-              right: 20,
-              left: 15,
-            ),
-            child: _searchbarWidget(),
+      height: 170,
+      color: Color(0xFF33c9FF),
+      child: SafeArea(
+        child: Container(
+          height: 52,
+          alignment: Alignment.topCenter,
+          padding: EdgeInsets.only(
+            top: 20,
+            right: 20,
+            left: 15,
+          ),
+          child: _searchbarWidget(),
+        ),
       ),
-    ),
-  );
-}
+    );
+  }
 
   Widget _bottomWidget() {
     return Positioned(
@@ -70,7 +76,7 @@ class _HomeState extends State<HomePage> {
         width: AppUtil.screenWidth,
         height: AppUtil.screenHeight - 102,
         child: ListView(
-          padding: EdgeInsets.zero ,
+          padding: EdgeInsets.zero,
           children: <Widget>[
             RecommentItem(
               context: context,
@@ -102,11 +108,10 @@ class _HomeState extends State<HomePage> {
           onTap: _onSearchBarTapped,
           child: SearchBar(isEnable: false),
         ),
-        Image(
-          width: 16,
-          height: 16,
-          image: AssetImage('lib/images/scan.png'),
-        )
+        Container(
+          width: 25,
+          child: IconButton(icon: Icon(Icons.menu), onPressed: _onMenuTapped),
+        ),
       ],
     );
   }

@@ -1,4 +1,5 @@
 import 'package:douban/module/home/home_page.dart';
+import 'package:douban/module/nutrition/nutrition_page.dart';
 import 'package:douban/module/personal/personal_page.dart';
 import 'package:douban/module/public/app_util.dart';
 import 'package:douban/widgetofweek/widget_home.dart';
@@ -41,8 +42,8 @@ class _NavigationBarState extends State<NavigationBar> {
       bottomNavigationBar: BottomNavigationBar(
         items: <BottomNavigationBarItem> [
           BottomNavigationBarItem(icon: Icon(Icons.home),title: Text('首页')),
+          BottomNavigationBarItem(icon: Icon(Icons.widgets),title: Text('组件')),
           BottomNavigationBarItem(icon: Icon(Icons.person),title: Text('我的')),
-          BottomNavigationBarItem(icon: Icon(Icons.menu),title: Text('组件'))
         ],
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -50,8 +51,8 @@ class _NavigationBarState extends State<NavigationBar> {
       body: PageView(
         children: <Widget>[
           HomePage(),
+          WidgetHomePage(),
           PersonalPage(),
-          WidgetHomePage()
         ],
         controller: _pageController,
         onPageChanged: _onPageChanged,

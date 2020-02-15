@@ -50,6 +50,16 @@ flutter:
    - lib/images/star_grey.png
    - lib/images/want_watch.png
    - lib/images/has_watch.png
+   - lib/images/01.png
+   - lib/images/02.png
+   - lib/images/03.png
+   - lib/images/04.png
+   - lib/images/05.png
+   - lib/images/06.png
+   - lib/images/07.png
+   - lib/images/08.png
+   - lib/images/09.png
+   - lib/images/10.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
